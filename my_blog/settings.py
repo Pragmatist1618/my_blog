@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
-from .key import KEY
+from .settings_private import KEY, EMAIL, EMAIL_PWD
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -128,3 +128,16 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Настройки отпраки почты
+# хост smtp сервера, по умолчанию localhost
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = EMAIL
+# EMAIL_HOST_PASSWORD = EMAIL_PWD
+# # smtp порт, по умолчанию 25
+# EMAIL_PORT = 587
+# # использовать защищенное подключение (ssl - скрыток)
+# EMAIL_USE_TLS = True
+
+# при заданной настройке email сообщения выводятся в консоль
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

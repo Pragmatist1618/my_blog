@@ -233,4 +233,4 @@ GitHub.sublime-settings
 !.vscode/extensions.json
 .history
 
-my_blog/key.py
+my_blog/settings_private.py
