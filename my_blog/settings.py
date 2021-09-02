@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import sys
 from pathlib import Path
 
 from .settings_private import KEY, EMAIL, EMAIL_PWD
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
 
     'blog',
     'taggit',
+
 ]
 
 MIDDLEWARE = [
