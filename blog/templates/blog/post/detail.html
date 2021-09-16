@@ -15,15 +15,26 @@
         {% endfor %}
     </p>
     <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
+    <div class="bg-image hover-overlay ripple shadow-1-strong rounded-5 ripple-surface">
+                        <img src="{{ post.image.url }}" alt="" class="img-fluid">
+                        <a href="#">
+                        <div class="mask" style="
+                                            background: linear-gradient(
+                                            45deg,
+                                            rgba(29, 236, 197, 0.5),
+                                            rgba(91, 14, 214, 0.5) 100%);">
+                        </div>
+                        </a>
+                    </div>`
     {{ post.body|markdown }}
-    <p>
-        <a href="{% url 'blog:post_share' post.id %}">Share this post</a>
-    </p>
+{#    <p>#}
+{#        <a href="{% url 'blog:post_share' post.id %}">Share this post</a>#}
+{#    </p>#}
 
-    <h2>Similar posts</h2>
+    <h2>Похожие статьи: </h2>
     <div class="similar-posts">
         {% for similar_post in similar_posts %}
-            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            <a href="{{ similar_post.get_absolute_url }}">{{ similar_post.title }}</a>
         {% endfor %}
     </div>
 
