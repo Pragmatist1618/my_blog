@@ -9,12 +9,12 @@
 
 {#    <p class="tags">{{ post.tags.all|join:", " }}</p>#}
     <p class="tags">
-        Tags:
+        Теги:
         {% for tag in post.tags.all %}
             <a href="{% url 'blog:post_list_by_tag' tag.slug %}">{{ tag.name }}</a>
         {% endfor %}
     </p>
-    <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
+    <p class="date">Опубликовано {{ post.publish }}, автор: {{ post.author|title }}</p>
     <div class="bg-image hover-overlay ripple shadow-1-strong rounded-5 ripple-surface">
                         <img src="{{ post.image.url }}" alt="" class="img-fluid">
                         <a href="#">
@@ -39,30 +39,32 @@
     </div>
 
     {% with comments.count as total_comments %}
-        <h2>{{ total_comments }} comment {{ total_comments|pluralize }}</h2>
+        <h2>{{ total_comments }} {{ total_comments|rupluralize:'комментарий,комментария,комментариев' }}</h2>
     {% endwith %}
 
     {% for comment in comments %}
         <div class="comment">
             <p class="info">
-                Comment {{ forloop.counter }} by {{ comment.name }}
+                Комментарий {{ forloop.counter }} от {{ comment.name }}
                 {{ comment.created }}
             </p>
             {{ comment.body }}
         </div>
     {% empty %}
-        <p>There are no comments yet.</p>
+        <p>Никто не поделился своим мнением!</p>
     {% endfor %}
 
     {% if new_comment %}
-        <h2>Your comment has been added.</h2>
+        <h2>Ваш комментарий добавлен.</h2>
     {% else %}
-        <h2>Add a new comment</h2>
-        <form action="." method="post">
+        <h2>Добавить новый комментарий</h2>
+        <div class="col-lg-8 col-md-10">
+            <form action="." method="post">
             {{ comment_form }}
             {% csrf_token %}
-            <p><input type="submit" value="Add comment"></p>
+            <p><button class="btn btn-primary ripple-surface" type="submit">Добавить комментарий</button></p>
         </form>
+        </div>
     {% endif %}
 
 
