@@ -24,6 +24,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOIES, default='draft')
+    image = models.ImageField()
 
     object = models.Manager()
     published = PublishedManager()

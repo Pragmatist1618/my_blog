@@ -2,7 +2,11 @@
 {% load blog_tags %}
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
-    <h1>{{ post.title }}</h1>
+    <div class="container mt-3">
+        <section>
+            <h2 class="h1 text-center my-4">{{ post.title }}</h2>
+        </section>
+
 {#    <p class="tags">{{ post.tags.all|join:", " }}</p>#}
     <p class="tags">
         Tags:
@@ -49,4 +53,7 @@
             <p><input type="submit" value="Add comment"></p>
         </form>
     {% endif %}
+
+
+    </div>
 {% endblock %}

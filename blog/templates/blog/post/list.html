@@ -4,13 +4,13 @@
 {% block title %}My blog{% endblock %}
 {% block content %}
     <div class="container">
-        {% if tag %}
-            <h2 class="h1 text-center my-4">Статьи по тэгу "{{ tag.name }}":</h2>
-        {% else %}
-            <selection>
+        <selection>
+            {% if tag %}
+                <h2 class="h1 text-center my-4">Статьи по тэгу "{{ tag.name }}":</h2>
+            {% else %}
                 <h2 class="h1 text-center my-4">Все статьи:</h2>
-            </selection>
-        {% endif %}
+            {% endif %}
+        </selection>
 
 
             {% for post in posts %}
@@ -28,7 +28,7 @@
                         <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
                     </div>
                     <div class="bg-image hover-overlay ripple shadow-1-strong rounded-5 ripple-surface">
-                        <img src="{% static 'img/2.jpg' %}" alt="" class="img-fluid">
+                        <img src="{{ post.image.url }}" alt="" class="img-fluid">
                         <a href="#">
                         <div class="mask" style="
                                             background: linear-gradient(
