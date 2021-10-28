@@ -152,4 +152,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # при заданной настройке email сообщения выводятся в консоль
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
