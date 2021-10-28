@@ -6,7 +6,16 @@ from taggit.models import Tag
 from django.db.models import Count
 
 from .forms import EmailPostForm, CommentForm
-from .models import Post
+from .models import Post, Ip
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR') # В REMOTE_ADDR значение айпи пользователя
+    return ip
 
 
 def post_list(request, tag_slug=None):
@@ -32,6 +41,14 @@ def post_list(request, tag_slug=None):
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(Post, slug=post, status='published', publish__year=year,
                              publish__month=month, publish__day=day)
+
+    ip = get_client_ip(request)
+
+    if Ip.objects.filter(ip=ip).exists():
+        post.views.add(Ip.objects.get(ip=ip))
+    else:
+        Ip.objects.create(ip=ip)
+        post.views.add(Ip.objects.get(ip=ip))
 
     comments = post.comments.filter(active=True)
     new_comment = None

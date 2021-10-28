@@ -13,9 +13,16 @@
 }
 
 p.date {
-    color:#ccc;
+    color:#808080;
     font-family: georgia, serif;
-    font-size: 12px;
+    font-size: 14px;
+    font-style: italic;
+}
+
+p.views {
+    color:#808080;
+    font-family: georgia, serif;
+    font-size: 14px;
     font-style: italic;
 }
 

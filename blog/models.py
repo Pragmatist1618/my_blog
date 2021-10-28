@@ -11,6 +11,10 @@ class PublishedManager(models.Manager):
         return super().get_queryset().filter(status='published')
 
 
+class Ip(models.Model):
+    ip = models.CharField(max_length=100)
+
+
 class Post(models.Model):
     STATUS_CHOIES = (
         ('draft', 'Draft'),
@@ -27,6 +31,8 @@ class Post(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOIES, default='draft')
     image = models.ImageField()
 
+    views = models.ManyToManyField(Ip, related_name="post_views", blank=True)
+
     object = models.Manager()
     published = PublishedManager()
     tags = TaggableManager(through=RuTaggedItem)
@@ -40,6 +46,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog:post_detail', args=[self.publish.year,
                         self.publish.month, self.publish.day, self.slug])
+
+    def total_views(self):
+        return self.views.count()
 
 
 class Comment(models.Model):
